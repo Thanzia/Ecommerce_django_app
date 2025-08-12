@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- section -->
+<section class="bg-pink-100">
+	<div class="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:px-8">
+		<header class="text-center mx-auto max-w-2xl">
+			<h2 class="text-4xl font-bold text-rose-800 mb-4">Product Collection</h2>
+			<p class="text-lg text-yellow-800 leading-relaxed">
+				Explore our collection of handcrafted gifts, personalized hampers, and artistic keepsakes —
+				each item thoughtfully designed to make every occasion truly special.
+			</p>
+		</header>
+	</div>
+
+	<ul class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+
+		{% for p in products %}
+		<li class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition">
+			<a href="{% url 'product_detail' p.id %}" class="group block no-underline">
+				<img src="{{ p.product_image.url }}" alt="{{ p.title }}" loading="lazy"
+					class="h-[250px] w-full object-cover transition duration-500 group-hover:scale-105" />
+
+				<div class="p-4">
+					<h3
+						class="text-sm font-medium text-gray-800 group-hover:underline group-hover:text-pink-600 transition">
+						{{ p.title }}
+					</h3>
+
+					<p class="mt-1 text-gray-900 font-semibold">
+						₹{{ p.price }}
+					</p>
+				</div>
+			</a>
+		</li>
+		{% endfor %}
+	</ul>
+</section>
+
+
+{% endblock %}

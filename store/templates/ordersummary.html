@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block carousel %}
+{% endblock %}
+
+{% block content %}
+
+<div style="max-width: 800px; margin: 40px auto; text-align: center; font-family: sans-serif;">
+    <h2>Order Summary</h2>
+
+    {% if orderitems %}
+    <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr style="background-color: #6d6d6d;">
+                <th style="padding: 12px; border: 1px solid #ffa144;">Product</th>
+                <th style="padding: 12px; border: 1px solid #ffa144;">Size</th>
+                <th style="padding: 12px; border: 1px solid #ffa144;">Quantity</th>
+                <th style="padding: 12px; border: 1px solid #ffa144;">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in orderitems %}
+            <tr>
+                <td style="padding: 10px; border: 1px solid #f8ff26;">{{ item.product_item.title }}</td>
+                <td style="padding: 10px; border: 1px solid #f8ff26;">{{ item.size_object.size_name }}</td>
+                <td style="padding: 10px; border: 1px solid #f8ff26;">{{ item.quantity }}</td>
+                <td style="padding: 10px; border: 1px solid #f8ff26;">₹{{ item.product_item.price }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No order items found.</p>
+    {% endif %}
+</div>
+
+{% endblock %}
