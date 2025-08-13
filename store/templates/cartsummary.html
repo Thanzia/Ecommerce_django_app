@@ -16,35 +16,43 @@
                 {% for i in items %}
                 <div class="md:flex items-strech py-8 md:py-10 lg:py-8 border-t border-gray-50">
                     <div class="md:w-4/12 2xl:w-1/4 w-full">
-                        <img src="{{ i.product_object.product_image.url }}" alt="Black Leather Purse"
+                        <img src="{{ i.product_object.image.url }}" alt="Black Leather Purse"
                             class="h-full object-center object-cover md:block hidden" />
                     </div>
                     <div class="md:pl-3 md:w-8/12 2xl:w-3/4 flex flex-col justify-center">
                         <p class="text-xs leading-3 text-gray-800 md:pt-0 pt-4">RF293</p>
                         <div class="flex items-center justify-between w-full">
-                            <p class="text-base font-black leading-none text-gray-800">{{i.product_object.title}}</p>
+                            <p class="text-base font-black leading-none text-gray-800">{{i.product_object.name}}</p>
                             <span class="py-2 px-1 border border-gray-200 mr-6 focus:outline-none">{{i.quantity}}</span>
                         </div>
-                        
-                        
+
+
                         <p class="w-96 text-xs leading-3 text-gray-600">Description: {{i.product_object.description}}
                         </p>
                         <p class="w-96 text-xs leading-3 text-gray-600">Price : {{i.product_object.price}}</p>
                         <div class="flex items-center justify-between pt-5">
-                            <div class="flex itemms-center">
-                                <p><a href="#" class="text-xs leading-3 underline text-gray-800 cursor-pointer">Add to
-                                        favorites</a></p>
-                                <p><a href="{% url 'summaryremove' pk=i.id %}"
-                                        class="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer">Remove</a>
-                                </p>
-                            </div>
+                            <div class="flex items-center space-x-6">
+  <form action="{% url 'add_to_wishlist' pk=i.id %}" method="post" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit" 
+      class="text-sm underline text-black hover:text-gray-700 bg-transparent border-none p-0 cursor-pointer">
+      Add to wishlist
+    </button>
+  </form>
+
+  <a href="{% url 'cart_summary_remove' pk=i.id %}" 
+    class="text-sm underline text-black hover:text-gray-700 cursor-pointer">
+    Remove
+  </a>
+</div>
+
                             <p class="text-base font-black leading-none text-gray-800">{{i.item_total}}</p>
                         </div>
                     </div>
                 </div>
                 {% endfor %}
 
-                <a href="{% url 'all' %}" class="flex font-semibold text-indigo-600 text-sm mt-10">
+                <a href="{% url 'index' %}" class="flex font-semibold text-indigo-600 text-sm mt-10">
                     <svg class="fill-current mr-2 text-indigo-600 w-4" viewBox="0 0 448 512">
                         <path
                             d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z" />
@@ -63,18 +71,10 @@
                         Shipping
                     </label>
                     <select class="block p-2 text-gray-600 w-full text-sm">
-                        <option>Standard shipping - $10.00</option>
+                        <option>Standard shipping - ₹ 10.00</option>
                     </select>
                 </div>
-                <div class="py-10">
-                    <label for="promo" class="font-semibold inline-block mb-3 text-sm uppercase">
-                        Promo Code
-                    </label>
-                    <input type="text" id="promo" placeholder="Enter your code" class="p-2 text-sm w-full" />
-                </div>
-                <button class="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase">
-                    Apply
-                </button>
+                
                 <div class="border-t mt-8">
                     <div class="flex font-semibold justify-between py-6 text-sm uppercase">
                         <span>Total cost</span>

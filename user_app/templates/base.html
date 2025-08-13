@@ -34,10 +34,10 @@
 					<a class="nav-link active text-dark" href="">Collections</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link active text-dark" href="">Contact</a>
+					<a class="nav-link active text-dark" href="{% url 'contact' %}">Contact</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link active text-dark" href="">Signup</a>
+					<a class="nav-link active text-dark" href="{% url 'signup' %}">Signup</a>
 				</li>
 
 			</ul> 
@@ -49,19 +49,19 @@
 				</li>
 				{% if user.is_authenticated %}
 				<li class="nav-item">
-					<a class="nav-link active text-dark" href=""><i class="fa-solid fa-user"></i></a>
+					<a class="nav-link active text-dark" href="{% url 'logout' %}"><i class="fa-solid fa-user"></i></a>
 				</li>
 				{% else %}
 				<li class="nav-item">
-					<a class="nav-link active text-dark" href="">Login</a>
+					<a class="nav-link active text-dark" href="{% url 'login' %}">Login</a>
 				</li>
 				{% endif %}
 
 				<li class="nav-item">
-					<a class="nav-link active text-dark" href=""><i class="fa-solid fa-cart-shopping"></i></a>
+					<a class="nav-link active text-dark" href="{% url 'cart_summary' %}"><i class="fa-solid fa-cart-shopping"></i></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link active text-dark" href=""><i class="fa-solid fa-heart"></i></a>
+					<a class="nav-link active text-dark" href="{% url 'wishlist' %}"><i class="fa-solid fa-heart"></i></a>
 				</li>
 
 				
@@ -148,10 +148,10 @@
 				<div class="col-md-4">
 					<h6 class="text-uppercase fw-semibold">Follow Us</h6>
 					<div class="d-flex gap-3">
-						<a href="https://www.instagram.com/" target="_blank" class="text-white fs-5">
+						<a href="https://www.instagram.com/biyyas_craftale/" target="_blank" class="text-white fs-5">
 							<i class="fab fa-instagram"></i>
 						</a>
-						<a href="https://www.youtube.com/" target="_blank" class="text-white fs-5">
+						<a href="https://www.youtube.com/@biyyascraftale79" target="_blank" class="text-white fs-5">
 							<i class="fab fa-youtube"></i>
 						</a>
 					</div>

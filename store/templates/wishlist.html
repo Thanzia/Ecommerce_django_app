@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>My Wishlist</title>
+{% endblock %}
+
+{% block carousel %}
+{% endblock %}
+
+
+{% block content %}
+
+  <h1 class="text-2xl font-bold mb-4 text-center mt-4">My Wishlist</h1>
+
+  {% if items %}
+    <ul class="divide-y divide-gray-200 bg-orange-100 max-w-6xl mx-auto">
+      {% for item in items %}
+        <li class="flex items-center justify-between py-4 ">
+          <div class="flex items-center space-x-4 max-w-xl mx-auto" >
+            <img src="{{ item.product_object.image.url }}" alt="{{ item.product_object.name }}" class="w-16 h-16 object-cover rounded" />
+            <div>
+              <h2 class="font-semibold text-lg">{{ item.product_object.name }}</h2>
+              <p class="text-gray-600">₹ {{ item.product_object.price }}</p>
+            </div>
+          </div>
+          <div class="flex space-x-4 max-w-xl mx-auto">
+            <form action="{% url 'add_to_cart' pk=item.product_object.id %}" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="quantity" value="1" />
+              <button type="submit" class="bg-yellow-300 px-4 py-2 rounded hover:bg-yellow-200 text-gray-900 font-semibold">
+                Add to Cart
+              </button>
+            </form>
+            <form action="{% url 'wishlist_remove' pk=item.id %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="bg-red-300 px-4 py-2 rounded hover:bg-red-400 text-gray-900 font-semibold">
+                Remove
+              </button>
+            </form>
+
+            
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Your wishlist is empty.</p>
+  {% endif %}
+{% endblock %}
+
+
+
+
+
