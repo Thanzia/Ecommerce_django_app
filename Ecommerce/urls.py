@@ -17,6 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from user_app.views import *
+from store.views import *
+
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,6 +35,20 @@ urlpatterns = [
 	path('user/reset_password/', ResetPasswordView.as_view(), name='reset_pwd'),
 	path('user/verify_otp/', OtpVerifyView.as_view(), name='pwdotp_verify'),
 
+    path('store/products/', ProductListView.as_view(), name='products_list'),
+    path('store/products/<int:pk>/', ProductDetailView.as_view(), name='product_detail'),
+    path('store/add_to_cart/<int:pk>/', AddtoCartView.as_view(), name='add_to_cart'),
+    path('store/cart_summary/', CartSummaryView.as_view(), name='cart_summary'),
+    path('store/cart_summary/remove/<int:pk>/', CartSummaryRemove.as_view(), name='cart_summary_remove'),
+    path('store/add_to_wishlist/<int:pk>/', AddWishlistItem.as_view(), name='add_to_wishlist'),
+    path('store/wishlist/', WishlistView.as_view(), name='wishlist'),
+    path('store/wishlist/remove/<int:pk>/', WishlistRemoveItem.as_view(), name='wishlist_remove'),
+
+    path('store/order/', OrderView.as_view(), name='order'),
+    path('store/payment_success/', PaymentSucessView.as_view(), name='payment_success'),
+    path('order/summary/', OrderSummary.as_view(), name='order_summary'),
+
+
     path('about/', about_view, name='about'),
     path('contact/', contact_view, name='contact'),
     path('faq/', faq_view, name='faq'),
@@ -38,5 +56,9 @@ urlpatterns = [
     path('privacy/', privacy_view, name='privacy'),
     path('careers/', careers_view, name='careers'),
 	path('shipping/', shipping_view, name='shipping'),
+	
 
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

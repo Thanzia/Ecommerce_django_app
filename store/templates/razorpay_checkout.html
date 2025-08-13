@@ -16,7 +16,6 @@
         <thead>
             <tr style="background-color: #ffffff;">
                 <th style="padding: 12px; border: 1px solid #cdcdcd;">Product</th>
-                <th style="padding: 12px; border: 1px solid #cdcdcd;">Size</th>
                 <th style="padding: 12px; border: 1px solid #cdcdcd;">Quantity</th>
                 <th style="padding: 12px; border: 1px solid #cdcdcd;">Price</th>
             </tr>
@@ -25,7 +24,7 @@
             {% for i in items %}
             <tr>
                 <td style="padding: 10px; border: 1px solid #8a8a8a;">{{ i.product_item.title }}</td>
-                <td style="padding: 10px; border: 1px solid #8a8a8a;">{{ i.size_object.size_name }}</td>
+                
                 <td style="padding: 10px; border: 1px solid #8a8a8a;">{{ i.quantity }}</td>
                 <td style="padding: 10px; border: 1px solid #8a8a8a;">₹{{ i.product_item.price }}</td>
             </tr>
@@ -45,7 +44,7 @@
 
   <script>
     var options = {
-      "key": "rzp_test_Abukr7XWkZEjLN",  // Replace with your Razorpay API key
+      "key": "{{ razorpay_key_id }}",  // Replace with your Razorpay API key
       "amount": "{{ amount|safe }}",  // Amount in paise
       "currency": "INR",
       "name": "CartNest",
