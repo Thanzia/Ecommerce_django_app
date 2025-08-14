@@ -1,35 +1,44 @@
 {% extends 'base.html' %}
 
-{% block carousel %}
+{% block title %}
+<title>Order Summary</title>
 {% endblock %}
 
 {% block content %}
-
-<div style="max-width: 800px; margin: 40px auto; text-align: center; font-family: sans-serif;">
-    <h2>Order Summary</h2>
+<div style="max-width: 900px; margin: 50px auto; font-family: sans-serif;">
+    <h2 style="text-align: center; font-size: 1.8rem; font-weight: bold; margin-bottom: 20px; color: #b91c1c;">
+        Order Summary
+    </h2>
 
     {% if orderitems %}
-    <table style="width: 100%; border-collapse: collapse;">
-        <thead>
-            <tr style="background-color: #6d6d6d;">
-                <th style="padding: 12px; border: 1px solid #ffa144;">Product</th>
-                <th style="padding: 12px; border: 1px solid #ffa144;">Quantity</th>
-                <th style="padding: 12px; border: 1px solid #ffa144;">Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in orderitems %}
-            <tr>
-                <td style="padding: 10px; border: 1px solid #f8ff26;">{{ item.product_item.title }}</td>
-                <td style="padding: 10px; border: 1px solid #f8ff26;">{{ item.quantity }}</td>
-                <td style="padding: 10px; border: 1px solid #f8ff26;">₹ {{ item.product_item.price }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div style="background-color: #fff7ed; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); overflow: hidden;">
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background-color: #fcd34d; color: #374151;">
+                    <th style="padding: 14px; text-align: left; font-weight: 600;">Product</th>
+                    <th style="padding: 14px; text-align: center; font-weight: 600;">Quantity</th>
+                    <th style="padding: 14px; text-align: right; font-weight: 600;">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in orderitems %}
+                <tr style="border-bottom: 1px solid #fcd34d;">
+                    <td style="padding: 12px; text-align: left; color: #374151;">
+                        {{ item.product_item.title }}
+                    </td>
+                    <td style="padding: 12px; text-align: center; color: #374151;">
+                        {{ item.quantity }}
+                    </td>
+                    <td style="padding: 12px; text-align: right; color: #374151;">
+                        ₹ {{ item.product_item.price }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
     {% else %}
-    <p>No order items found.</p>
+    <p style="text-align: center; color: #6b7280;">No order items found.</p>
     {% endif %}
 </div>
-
 {% endblock %}

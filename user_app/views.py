@@ -130,7 +130,7 @@ class LoginView(View):
 
 				print("login successful")
 
-				# return redirect("product_list")
+				return redirect("products_list")
 			
 			form = LoginForm
 			
@@ -165,8 +165,8 @@ class LoginEmailView(View):
 
 				login(request,user_obj)
 
-				# return redirect("product_list")
-				print("login successful")
+				return redirect("products_list")
+				# print("login successful")
 		
 		return render(request,"login_email.html",{"form":form}) 
 	

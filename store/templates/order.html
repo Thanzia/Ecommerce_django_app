@@ -1,21 +1,99 @@
 {% extends "base.html" %}
 
+{% block title %}
+<title>Order Form</title>
+{% endblock %}
+
 {% block carousel %}
 {% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow p-4">
-                <h4 class="mb-4 text-center">Fill the Form</h4>
-                <form method="post">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit" class="btn btn-primary w-100 mt-3">Confirm</button>
-                </form>
-            </div>
-        </div>
+<style>
+    label {
+        display: none;
+    }
+
+    label[for="id_payment_method"] {
+        display: inline-block;
+        font-weight: lighter;
+    }
+
+    body {
+        background-color: #FEF9C3;
+        /* Tailwind bg-yellow-200 */
+        margin: 0;
+        padding: 0;
+        background: url('/static/images/bg_image.png') no-repeat center center fixed;
+        background-size: cover;
+        min-height: 100vh;
+    }
+
+    .overlay {
+        background-color: rgba(255, 255, 255, 0.3);
+        /* Soft overlay */
+        backdrop-filter: blur(1px);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+    }
+
+    .card {
+        background-color: #fff7ed;
+        /* Soft peach-beige */
+        border: 1px solid #fcd34d;
+        border-radius: 1rem;
+        padding: 2.5rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+        text-align: center;
+    }
+
+    .card h4 {
+        color: #b91c1c;
+    }
+
+    .form-control,
+    .form-select {
+        background-color: #fff;
+        border: 1px solid #e5e7eb;
+        color: #374151;
+        width: 100%;
+        padding: 0.75rem;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+        font-size: 0.95rem;
+    }
+
+    .form-control::placeholder {
+        color: #9ca3af;
+    }
+
+    button.btn-primary {
+        background-color: darkred;
+        border: none;
+        padding: 0.6rem 1.5rem;
+        color: white;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        transition: background-color 0.3s ease;
+    }
+
+    button.btn-primary:hover {
+        background-color: #a4161a;
+    }
+</style>
+
+<div class="overlay">
+    <div class="card">
+        <h4 class="mb-4">Fill the Form</h4>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary w-100 mt-3">Confirm</button>
+        </form>
     </div>
 </div>
 {% endblock %}

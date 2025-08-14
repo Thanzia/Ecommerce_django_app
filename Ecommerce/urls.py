@@ -47,6 +47,7 @@ urlpatterns = [
     path('store/order/', OrderView.as_view(), name='order'),
     path('store/payment_success/', PaymentSucessView.as_view(), name='payment_success'),
     path('order/summary/', OrderSummary.as_view(), name='order_summary'),
+    path('order/cod_success/<int:pk>/', CODSuccessView.as_view(), name='cod_success'),
 
 
     path('about/', about_view, name='about'),
@@ -62,3 +63,12 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+from django.conf.urls import handler404, handler500, handler403, handler400
+from store import views as store_views
+
+handler404 = store_views.error_404_view
+handler500 = store_views.error_500_view
+handler403 = store_views.error_403_view
+handler400 = store_views.error_400_view
+

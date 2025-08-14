@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<div style="text-align:center; margin-top: 80px;">
+    <h1>Error {{ status_code }}</h1>
+    <p>{{ message }}</p>
+    <a href="{% url 'index' %}" style="color: brown; text-decoration: underline;">Go Back Home</a>
+</div>
+{% endblock %}

@@ -6,6 +6,7 @@ from store.forms import *
 
 import razorpay
 from django.conf import settings
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
@@ -66,7 +67,7 @@ class AddtoCartView(View):
 
         print("item added sucessfully")
 
-        return redirect("index")
+        return redirect("cart_summary")
     
 
 # cart summary view
@@ -114,7 +115,7 @@ class AddWishlistItem(View):
 
         WishlistItem.objects.create(wishlist_object=user,product_object=item)
 
-        return redirect("index")
+        return redirect("wishlist")
 
 # wishlist view
 class WishlistView(View):
@@ -186,7 +187,7 @@ class OrderView(FormView):
 
                 i.save()
 
-            items = OrderItem.objects.filter(order__is_paid=False)
+            items = OrderItem.objects.filter(order = order_object)
 
             total_sum = sum([float(i.price) for i in items])
 
@@ -220,7 +221,26 @@ class OrderView(FormView):
 
                 order_object.save()
 
-                return render(request,"payment_sucess.html")
+                return render(request,"cod_checkout.html",{'order':order_object,'items':items,'amount': total_sum})
+            
+class CODSuccessView(View):
+
+    def post(self, request, *args, **kwargs):
+        id = kwargs.get("pk")
+        order = get_object_or_404(Order, id=id, user=request.user)
+
+        # Template can get items and total from order
+        return render(request, "cod_payment_success.html", {
+            'order': order
+        })
+
+    def get(self, request, *args, **kwargs):
+        id = kwargs.get("pk")
+        order = get_object_or_404(Order, id=id, user=request.user)
+
+        return render(request, "cod_payment_success.html", {
+            'order': order
+        })
 
 
 class PaymentSucessView(View):
@@ -254,3 +274,45 @@ class OrderSummary(View):
         orderitems = OrderItem.objects.filter(order_object__in=user)
 
         return render(request,"ordersummary.html",{"orderitems":orderitems})
+
+
+
+
+# error handlers
+
+# store/views.py
+import logging
+
+# Create a logger for errors
+logger = logging.getLogger(__name__)
+
+def error_handler(request, exception=None, status=500):
+    # Log the error for debugging (only logs if status is 500 or unknown)
+    if status == 500 or not exception:
+        logger.exception("Server error occurred")
+    else:
+        logger.warning(f"Error {status}: {exception}")
+
+    context = {
+        'status_code': status,
+        'message': {
+            404: "Oops! The page you are looking for was not found.",
+            500: "Something went wrong on our server.",
+            403: "You do not have permission to access this page.",
+            400: "Bad request. Please check your input and try again."
+        }.get(status, "An unexpected error occurred.")
+    }
+    return render(request, 'error.html', context, status=status)
+
+# Wrappers for Django’s error handlers
+def error_404_view(request, exception):
+    return error_handler(request, exception, 404)
+
+def error_500_view(request):
+    return error_handler(request, status=500)
+
+def error_403_view(request, exception):
+    return error_handler(request, exception, 403)
+
+def error_400_view(request, exception):
+    return error_handler(request, exception, 400)

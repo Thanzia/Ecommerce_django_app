@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>COD Payment Success</title>
+{% endblock %}
+
+{% block carousel %}{% endblock %}
+
+{% block content %}
+<div style="max-width: 900px; margin: 50px auto; font-family: sans-serif;">
+    <h2 style="text-align: center; font-size: 1.8rem; font-weight: bold; margin-bottom: 20px; color: #b91c1c;">
+        Order Successful!
+    </h2>
+
+    <p style="text-align: center; font-size: 1rem; margin-bottom: 30px; color: #1f2937;">
+        Thank you for your order. Your items will be delivered soon.
+    </p>
+
+    <div style="background-color: #ffffff; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); overflow: hidden; margin-bottom: 20px;">
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background-color: #fbbf24; color: #111827;">
+                    <th style="padding: 14px; text-align: left; font-weight: 700;">Product</th>
+                    <th style="padding: 14px; text-align: center; font-weight: 700;">Quantity</th>
+                    <th style="padding: 14px; text-align: right; font-weight: 700;">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr style="border-bottom: 1px solid #e5e7eb;">
+                    <td style="padding: 12px; text-align: left; color: #1f2937;">
+                        {{ item.product.name }}
+                    </td>
+                    <td style="padding: 12px; text-align: center; color: #1f2937;">
+                        {{ item.quantity }}
+                    </td>
+                    <td style="padding: 12px; text-align: right; color: #1f2937;">
+                        ₹{{ item.price }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <h3 style="text-align: right; font-size: 1.2rem; font-weight: bold; color: #1f2937; margin-bottom: 20px;">
+        Total Amount: ₹{{ total|floatformat:2 }}
+    </h3>
+
+    <div style="text-align: center; margin-top: 30px;">
+        <a href="{% url 'index' %}" 
+           style="background-color: #f59e0b; color: white; font-weight: 600; padding: 10px 20px; border-radius: 8px; text-decoration: none; transition: background-color 0.3s ease;">
+           Continue Shopping
+        </a>
+    </div>
+</div>
+{% endblock %}
