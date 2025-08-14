@@ -1,0 +1,6 @@
+Django
+psycopg2-binary
+dj-database-url
+gunicorn
+razorpay
+python-decouple

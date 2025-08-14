@@ -1,2 +1,4 @@
 .env
 db.sqlite3
+data.json
+data_fixed.json
