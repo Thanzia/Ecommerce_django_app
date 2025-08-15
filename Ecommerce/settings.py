@@ -47,8 +47,7 @@ AUTH_USER_MODEL = 'user_app.CustomUserModel'
 from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+
 
 
 MIDDLEWARE = [
@@ -148,6 +147,12 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+# media
+MEDIA_URL = 'https://mycraftale-media.onrender.com'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+
 
 
 # Static files (CSS, JavaScript, Images)
