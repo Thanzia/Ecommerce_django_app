@@ -150,7 +150,7 @@ USE_I18N = True
 USE_TZ = True
 
 # media
-MEDIA_URL = 'https://mycraftale-media.onrender.com'
+MEDIA_URL = 'https://mycraftale-media.onrender.com/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 
