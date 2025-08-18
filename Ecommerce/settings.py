@@ -52,6 +52,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+	'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -165,6 +166,9 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'  # Where collectstatic will put files
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
+
+# WhiteNoise for production
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # Default primary key field type

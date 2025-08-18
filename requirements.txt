@@ -5,3 +5,4 @@ gunicorn
 razorpay
 python-decouple
 setuptools>=60.0.0
+whitenoise
