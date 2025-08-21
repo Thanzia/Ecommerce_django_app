@@ -8,87 +8,72 @@
 	{% block title %}
 	<title>HomePage</title>
 	{% endblock %}
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+	<!-- Bootstrap JS Bundle (with Popper) -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous"></script>
+
+	<!-- FontAwesome -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 		integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
+	<!-- Tailwind -->
+	<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
 <body>
-	<div class="navbar navbar-expand-lg bg-light border shadow">
+	<!-- NAVBAR -->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light border shadow">
 		<div class="container">
 			<!-- Brand -->
-			<a href="{% url 'index' %}" class="navbar-brand">
-				<i class="fa-brands fa-shopify" style="color: #e9162b;"></i>
-				<b>Craftale</b>
+			<a class="navbar-brand" href="{% url 'index' %}">
+				<i class="fa-brands fa-shopify" style="color:#e9162b;"></i><b>Craftale</b>
 			</a>
 
-			<!-- Mobile toggle button -->
+			<!-- Hamburger -->
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
 				aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 
-			<!-- Collapsible content -->
+			<!-- Menu -->
 			<div class="collapse navbar-collapse" id="mainNavbar">
 				<!-- Center links -->
 				<ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-					<li class="nav-item">
-						<a class="nav-link text-dark" aria-current="page" href="{% url 'index' %}">Home</a>
+					<li class="nav-item"><a class="nav-link text-dark" href="{% url 'index' %}">Home</a></li>
+					<li class="nav-item"><a class="nav-link text-dark" href="{% url 'products_list' %}">Collections</a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link text-dark" href="{% url 'products_list' %}">Collections</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link text-dark" href="{% url 'contact' %}">Contact</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link text-dark" href="{% url 'signup' %}">Signup</a>
-					</li>
+					<li class="nav-item"><a class="nav-link text-dark" href="{% url 'contact' %}">Contact</a></li>
+					<li class="nav-item"><a class="nav-link text-dark" href="{% url 'signup' %}">Signup</a></li>
 				</ul>
 
-				<!-- Right side icons -->
+				<!-- Right links -->
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-					<li class="nav-item">
-						<a class="nav-link text-dark" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
-					</li>
+					<li class="nav-item"><a class="nav-link text-dark" href="#"><i
+								class="fa-solid fa-magnifying-glass"></i></a></li>
 					{% if user.is_authenticated %}
-					<li class="nav-item">
-						<a class="nav-link text-dark" href="{% url 'logout' %}"><i class="fa-solid fa-user"></i></a>
-					</li>
+					<li class="nav-item"><a class="nav-link text-dark" href="{% url 'logout' %}"><i
+								class="fa-solid fa-user"></i></a></li>
 					{% else %}
-					<li class="nav-item">
-						<a class="nav-link text-dark" href="{% url 'login' %}">Login</a>
-					</li>
+					<li class="nav-item"><a class="nav-link text-dark" href="{% url 'login' %}">Login</a></li>
 					{% endif %}
-					<li class="nav-item">
-						<a class="nav-link text-dark" href="{% url 'cart_summary' %}">
-							<i class="fa-solid fa-cart-shopping"></i>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link text-dark" href="{% url 'wishlist' %}">
-							<i class="fa-solid fa-heart"></i>
-						</a>
-					</li>
+					<li class="nav-item"><a class="nav-link text-dark" href="{% url 'cart_summary' %}"><i
+								class="fa-solid fa-cart-shopping"></i></a></li>
+					<li class="nav-item"><a class="nav-link text-dark" href="{% url 'wishlist' %}"><i
+								class="fa-solid fa-heart"></i></a></li>
 				</ul>
 			</div>
 		</div>
-	</div>
+	</nav>
 
-
-
-
-	<!-- carousel starts here.......... -->
-
+	<!-- carousel -->
 	{% block carousel %}
-
 	<div id="carouselExample" class="carousel slide">
 		<div class="carousel-inner">
 			<div class="carousel-item active">
@@ -110,16 +95,12 @@
 			<span class="visually-hidden">Next</span>
 		</button>
 	</div>
-
 	{% endblock %}
 
-
-
-	{% block content %}
-	{% endblock %}
+	{% block content %}{% endblock %}
 
 	{% block script %}
-	<!-- personalised recommendation  -->
+	<!-- personalised recommendation -->
 	<section class="mt-10 bg-white px-4 py-6 max-w-6xl mx-auto text-center">
 		<h2 class="text-lg font-semibold text-gray-800 mb-4">Why You'll Love Shopping With Us</h2>
 		<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 text-sm text-gray-700">
@@ -129,16 +110,13 @@
 			<div>💬 24/7 Support</div>
 		</div>
 	</section>
-
 	{% endblock %}
 
-	<!-- footer starts here -->
-
+	<!-- FOOTER -->
 	{% block footer %}
 	<footer class="bg-dark text-white pt-5 pb-3">
 		<div class="container">
 			<div class="row g-4">
-
 				<div class="col-md-4">
 					<h6 class="text-uppercase fw-semibold">About Us</h6>
 					<ul class="list-unstyled small">
@@ -147,7 +125,6 @@
 						<li><a href="{% url 'contact' %}" class="text-white text-decoration-none">Contact</a></li>
 					</ul>
 				</div>
-
 				<div class="col-md-4">
 					<h6 class="text-uppercase fw-semibold">Help</h6>
 					<ul class="list-unstyled small">
@@ -156,7 +133,6 @@
 						<li><a href="{% url 'faq' %}" class="text-white text-decoration-none">FAQs</a></li>
 					</ul>
 				</div>
-
 				<div class="col-md-4">
 					<h6 class="text-uppercase fw-semibold">Follow Us</h6>
 					<div class="d-flex gap-3">
@@ -169,30 +145,14 @@
 					</div>
 					<p class="mt-3 small">Email: support@craftale.com</p>
 				</div>
-
 			</div>
-
 			<hr class="border-light mt-4">
-
 			<div class="text-center small text-secondary">
 				&copy; 2025 Craftale. All rights reserved.
 			</div>
 		</div>
 	</footer>
-
 	{% endblock %}
-
-
-</body>
-
-</html>
-
-
-
-
-
-
-
 </body>
 
 </html>
