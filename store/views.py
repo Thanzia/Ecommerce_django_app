@@ -37,12 +37,19 @@ class ProductDetailView(View):
 
         id = kwargs.get("pk")
 
-        item = Product.objects.get(id = id)  # specific object item = <product object 1>
+        user = request.user
 
-        print(item)
+        if user.is_authenticated:
 
-        return render(request,"productdetail.html",{"item":item})
-    
+            item = Product.objects.get(id = id)  # specific object item = <product object 1>
+
+            return render(request,"productdetail.html",{"item":item})
+        
+        else:
+
+            return redirect("login")
+
+        # print(item)
 
 # add to cart view
 class AddtoCartView(View):
