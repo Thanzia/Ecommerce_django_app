@@ -24,13 +24,13 @@
                 {% for item in orderitems %}
                 <tr style="border-bottom: 1px solid #fcd34d;">
                     <td style="padding: 12px; text-align: left; color: #374151;">
-                        {{ item.product_item.name }}
+                        {{ item.product.name }}
                     </td>
                     <td style="padding: 12px; text-align: center; color: #374151;">
                         {{ item.quantity }}
                     </td>
                     <td style="padding: 12px; text-align: right; color: #374151;">
-                        ₹ {{ item.product_item.price }}
+                        ₹ {{ item.product.price }}
                     </td>
                 </tr>
                 {% endfor %}
